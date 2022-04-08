@@ -1,0 +1,148 @@
+// ========================================= start flexbox classses =========================================
+.d-flex {
+	display: flex;
+}
+.justify-content-center {
+	justify-content: center;
+}
+.justify-content-between {
+	justify-content: space-between;
+}
+.justify-content-around {
+	justify-content: space-around;
+}
+.justify-content-sm-center {
+	@media screen and (max-width: 767px) {
+		justify-content: center;
+	}
+}
+.align-items-center {
+	align-items: center;
+}
+.align-items-start {
+	align-items: flex-start;
+}
+.flex-column {
+	flex-direction: column;
+}
+.flex-row {
+	flex-direction: row;
+}
+.flex-wrap {
+	flex-wrap: wrap;
+}
+.flex-nowrap {
+	flex-wrap: nowrap;
+}
+.flex-fill {
+	flex: 1;
+}
+.flex-grow-1 {
+	flex-grow: 1;
+}
+.flex-shrink-1 {
+	flex-shrink: 1;
+}
+.flex-gap-10 {
+	gap: 10px;
+}
+// ========================================= end flexbox classses =========================================
+
+// ========================================= start positioning classses =========================================
+.position-relative {
+	position: relative;
+}
+.position-absolute {
+	position: absolute;
+}
+.position-fixed {
+	position: fixed;
+}
+// ========================================= end positioning classses =========================================
+
+// ========================================= classses =========================================
+.pageContainer {
+	min-height: 100vh;
+}
+.pointer {
+	cursor: pointer;
+}
+
+.errorMsg {
+	font-size: 0.8rem;
+	color: red;
+	position: absolute;
+	z-index: 9999;
+	bottom: -20px;
+	left: 10px;
+}
+
+.fullWidth {
+	width: 100%;
+}
+
+.btn {
+	cursor: pointer;
+	border: none;
+	outline: none;
+}
+.mainButton {
+	color: white;
+	font-size: 0.9rem;
+	padding: 10px 20px;
+	width: 100%;
+	box-shadow: 0px 8px 18px #00000059;
+	border-radius: 15px;
+	transition: 0.3s all cubic-bezier(0.51, 0.44, 0.31, 0.76);
+	background-color: #000000;
+}
+.list-unstyled {
+	list-style: none;
+}
+.text-center {
+	text-align: center;
+}
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
+}
+.noWrapText {
+	white-space: nowrap;
+}
+.circleRadius {
+	border-radius: 100%;
+	overflow: hidden;
+}
+.upperCase {
+	text-transform: uppercase;
+}
+.capitalize {
+	text-transform: capitalize;
+}
+.lowerCase {
+	text-transform: lowercase;
+}
+.container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+}
+@media (min-width: 768px) {
+	.container {
+		width: 750px;
+	}
+}
+@media (min-width: 992px) {
+	.container {
+		width: 970px;
+	}
+}
+@media (min-width: 1200px) {
+	.container {
+		width: 1170px;
+	}
+}
