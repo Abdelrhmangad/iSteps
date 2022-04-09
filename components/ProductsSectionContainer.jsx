@@ -3,68 +3,32 @@ import Image from "next/image";
 import SortArrow from "@/images/sortArrows.svg";
 import FilterIcon from "@/images/filterIcon.svg";
 import ProductCard from "./productCard";
-import NextArr from "@/images/nextArr.svg";
-import PrevArr from "@/images/prevArr.svg";
 import CloseIcon from "@/images/closeIcon.svg";
-import { filtersData, products } from "./data";
+import { filtersData } from "./data";
+import Paginator from "./paginator";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductsCountToBeDisplayed } from "redux/productsReducer";
+import SortProducts from "./SortProducts";
 
 export default function ProductsSectionContainer() {
   const [mobileFilters, toggleMobileFilters] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (typeof window == "object" && window.innerWidth < 768) {
       setIsMobileView(true);
-      setNumberOfProductsToDisplay(4);
+      dispatch(setProductsCountToBeDisplayed(4));
     } else {
       setIsMobileView(false);
-      setNumberOfProductsToDisplay(6);
+      dispatch(setProductsCountToBeDisplayed(6));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const filteredProducts = useSelector((state) => state.products.productsToBeDisplayed);
 
-  const [productsData, setProductsData] = useState(products);
-  //todo: set active page number as a state
-  const [activePage, setActivePage] = useState(1);
-  //todo: set the number of products to be shown on the page as a state
-  const [numberOfProductsToDisplay, setNumberOfProductsToDisplay] = useState(6);
-  useEffect(() => {
-    //todo: slice products from page number * numbers of products to be shown on the page to page number * numbers of products to be shown on the page + numbers of products to be shown on the page
-    const productsToDisplay = products.slice(
-      (activePage - 1) * numberOfProductsToDisplay,
-      activePage * numberOfProductsToDisplay
-    );
-    setProductsData(productsToDisplay);
-  }, [activePage, numberOfProductsToDisplay]);
-
-  const [paginationPages, setPaginationPages] = useState(5);
-  var paginationCounters = [];
-  for (var i = 1; i < paginationPages; i++) {
-    paginationCounters.push(
-      <span
-        className={`pageNumber ${activePage == i ? "active" : ""}`}
-        onClick={() => setActivePage(i)}
-        key={i}>
-        {i}
-      </span>
-    );
-  }
-  //todo: make pagination counter as a state and compatiple always change on products length
-  useEffect(() => {
-    setPaginationPages(Math.ceil(products.length / numberOfProductsToDisplay) + 1);
-    console.log("|paginationPages", Math.ceil(products.length / numberOfProductsToDisplay));
-  }, [numberOfProductsToDisplay]);
   return (
     <div className="productsSection">
-      <div className="filtersHeader sm-hidden">
-        <span>
-          <Image src={SortArrow} alt="sort arrow" />
-          <span className="sortBy">Sort by</span>
-        </span>
-        <select className="selectMenu" name="sort" id="sort">
-          <option value="">Select</option>
-          <option value="">Price</option>
-          <option value="">Alphabet</option>
-        </select>
-      </div>
+      <SortProducts />
       <div
         className="filtersHeader sm-show pointer"
         onClick={() => toggleMobileFilters(!mobileFilters)}>
@@ -129,26 +93,12 @@ export default function ProductsSectionContainer() {
           </div>
         </div>
         <div className="productsContainer">
-          {productsData.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <ProductCard key={index} product={product} />
           ))}
         </div>
       </div>
-      <div className="paginationContainer">
-        <div className="content">
-          {activePage > 1 ? (
-            <span className="prev" onClick={() => setActivePage(activePage - 1)}>
-              <Image src={PrevArr} width={15} height={15} alt="prev arrow" />
-            </span>
-          ) : null}
-          {paginationCounters}
-          {paginationCounters.length > activePage ? (
-            <span className="next" onClick={() => setActivePage(activePage + 1)}>
-              <Image src={NextArr} width={15} height={15} alt="prev arrow" />
-            </span>
-          ) : null}
-        </div>
-      </div>
+      <Paginator />
     </div>
   );
 }

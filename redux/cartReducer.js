@@ -15,7 +15,6 @@ const globalDataSlice = createSlice({
     addToCart: (state, action) => {
       const isItemExist = state.items.find((item) => item.name === action.payload.name);
       if (isItemExist) {
-        isItemExist.quantity += 1;
         state.showCart = true;
       } else {
         state.items.push(action.payload);

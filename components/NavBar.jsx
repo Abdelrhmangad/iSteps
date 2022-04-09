@@ -10,7 +10,6 @@ const CartDropDown = dynamic(() => import("./CartDropDown"));
 export default function NavBar() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  console.log("cart", cart);
   return (
     <nav className="pageNav">
       <Image src={Logo} alt="logo" />
