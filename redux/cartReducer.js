@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  toggleCart: false,
+  showCart: false,
   items: [],
   total: 0,
 };
@@ -10,27 +10,28 @@ const globalDataSlice = createSlice({
   initialState,
   reducers: {
     toggleCart: (state, action) => {
-      state.toggleCart = !state.toggleCart;
+      state.showCart = !state.showCart;
     },
     addToCart: (state, action) => {
-      const isItemExist = state.items.find((item) => item.id === action.payload.id);
+      const isItemExist = state.items.find((item) => item.name === action.payload.name);
       if (isItemExist) {
         isItemExist.quantity += 1;
-        // isItemExist.price = isItemExist.price * isItemExist.quantity;
+        state.showCart = true
       } else {
         state.items.push(action.payload);
         state.total += parseFloat(action.payload.price);
+        state.showCart = true
       }
     },
     removeFromCart: (state, action) => {
-      const { id, price, quantity } = action.payload;
-      const index = state.items.findIndex((item) => item.id === id);
+      const { name, price, quantity } = action.payload;
+      const index = state.items.findIndex((item) => item.name === name);
       state.items.splice(index, 1);
       state.total -= parseFloat(price);
     },
     updateCart: (state, action) => {
-      const { id, quantity, price } = action.payload;
-      const index = state.items.findIndex((item) => item.id === id);
+      const { name, quantity, price } = action.payload;
+      const index = state.items.findIndex((item) => item.name === name);
       if (state.cart.items[index].quantity === 1 && quantity === -1) {
         state.items.splice(index, 1);
         state.total -= parseFloat(price);
@@ -40,9 +41,8 @@ const globalDataSlice = createSlice({
       }
     },
     emptyCart: (state, action) => {
-      state.cart = {
-        items: [],
-      };
+      state.showCart = false;
+      state.items = [];
     },
   },
 });

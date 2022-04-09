@@ -32,16 +32,16 @@ export default function ProductsSectionContainer() {
       <div className="productsContainer-section">
         <aside className="filtersContainer">
           <h5>Materials</h5>
-          {filtersData["materilaFilters"].map((filter) => (
-            <div key={filter.value} className="checkboxContainer">
+          {filtersData["materilaFilters"].map((filter, index) => (
+            <div key={index} className="checkboxContainer">
               <input type="checkbox" id={filter.value} value={filter.value} name="materials" />
               <label htmlFor={filter.value}>{filter.filterLabel}</label>
             </div>
           ))}
           <hr className="sectionsSeparater" />
           <h5>Price range</h5>
-          {filtersData["priceRangeFilters"].map((filter) => (
-            <div key={filter.value} className="checkboxContainer">
+          {filtersData["priceRangeFilters"].map((filter, index) => (
+            <div key={index} className="checkboxContainer">
               <input
                 type="radio"
                 id={filter.label}
@@ -61,16 +61,16 @@ export default function ProductsSectionContainer() {
                 <Image src={CloseIcon} alt="close icon" width={25} height={25} />
               </button>
             </div>
-            {filtersData["materilaFilters"].map((filter) => (
-              <div key={filter.value} className="checkboxContainer">
+            {filtersData["materilaFilters"].map((filter, index) => (
+              <div key={index} className="checkboxContainer">
                 <input type="checkbox" id={filter.value} value={filter.value} name="materials" />
                 <label htmlFor={filter.value}>{filter.filterLabel}</label>
               </div>
             ))}
             <hr className="sectionsSeparater" />
             <h5>Price range</h5>
-            {filtersData["priceRangeFilters"].map((filter) => (
-              <div key={filter.value} className="checkboxContainer">
+            {filtersData["priceRangeFilters"].map((filter, index) => (
+              <div key={index} className="checkboxContainer">
                 <input
                   type="radio"
                   id={filter.label}
@@ -88,8 +88,8 @@ export default function ProductsSectionContainer() {
           </div>
         </div>
         <div className="productsContainer">
-          {productsData.data.map((product) => (
-            <ProductCard key={product.name} details={product} />
+          {productsData.data.map((product, index) => (
+            <ProductCard key={index} product={product} />
           ))}
         </div>
       </div>

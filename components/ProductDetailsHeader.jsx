@@ -8,13 +8,11 @@ import ImgThree from "@/images/imgThree.png";
 import { products } from "./data";
 
 export default function ProductDetailsHeader() {
-  console.log("products", products);
   const featuredProduct = products.find((product) => product.featured);
-  console.log(featuredProduct);
   return (
     <div className="productDetails">
       <h1 className="productTitle bold">{featuredProduct.name}</h1>
-      <AddToCartBtn />
+      <AddToCartBtn productToBeAdded={featuredProduct} />
       <div className="productBanner">
         <span className="featuredBadge">Featured</span>
         <Image
@@ -33,7 +31,6 @@ export default function ProductDetailsHeader() {
                 key={index}
                 src={each.src}
                 alt="product img"
-                layout="fixed"
                 width={120}
                 height={180}
                 objectFit="cover"

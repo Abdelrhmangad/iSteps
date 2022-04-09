@@ -42,7 +42,9 @@
       align-items: flex-start;
       gap: 15px;
       .suggestedProducts {
-        width: 100%;
+        width: fit-content;
+        min-width: 300px;
+        max-width: 100%;
         .productsIThumbnails {
           margin-top: 1rem;
           display: flex;
@@ -224,7 +226,7 @@
 
   @media screen and (max-width: 767px) {
     .productDetails {
-      // background-color: red;
+      margin-top: unset;
       display: grid;
       row-gap: 20px;
       grid-template-rows: minmax(30px, auto);

@@ -1,0 +1,39 @@
+.cartDropDown {
+  position: absolute;
+  right: 30px;
+  top: 50px;
+  z-index: 9999;
+  width: min(350px, 100%);
+  background: #ffffff;
+  border: 4px solid #e4e4e4;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  .cartContent {
+    width: 100%;
+    margin: 10px auto;
+
+    .cartItem-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      .cartItem-info {
+        .cartItem-name {
+          font-weight: bold;
+        }
+        .cartItem-price {
+          color: #656565;
+        }
+      }
+    }
+  }
+  .cartClearBtn {
+    width: 100%;
+    padding: 10px;
+    background: #ffffff;
+    border: 3px solid #000000;
+  }
+}

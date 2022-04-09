@@ -1,7 +1,11 @@
-import ProductImg from "../public/images/headerBanner.png";
+import FeaturedImg from "../public/images/headerBanner.png";
 import ImgOne from "../public/images/imgOne.png";
 import ImgTwo from "../public/images/imgTwo.png";
 import ImgThree from "../public/images/imgThree.png";
+import ImgSeven from "../public/images/imgSeven.png";
+import imgSix from "../public/images/imgSix.png";
+import imgFour from "../public/images/imgFour.png";
+
 export const products = [
   {
     name: "Reinforced",
@@ -9,10 +13,10 @@ export const products = [
     price: 33.78,
     currency: "USD",
     image: {
-      src: "",
+      src: ImgSeven,
       alt: "",
     },
-    bestseller: true,
+    bestseller: false,
     featured: false,
     details: null,
   },
@@ -22,7 +26,7 @@ export const products = [
     price: 101.2,
     currency: "USD",
     image: {
-      src: "",
+      src: imgSix,
       alt: "",
     },
     bestseller: true,
@@ -35,10 +39,10 @@ export const products = [
     price: 101.2,
     currency: "USD",
     image: {
-      src: "",
+      src: imgFour,
       alt: "",
     },
-    bestseller: true,
+    bestseller: false,
     featured: false,
     details: null,
   },
@@ -47,8 +51,11 @@ export const products = [
     category: "steel",
     price: 93.89,
     currency: "USD",
-    image: "",
-    bestseller: false,
+    image: {
+      src: ImgOne,
+      alt: "",
+    },
+    bestseller: true,
     featured: false,
     details: null,
   },
@@ -58,7 +65,7 @@ export const products = [
     price: 120.21,
     currency: "USD",
     image: {
-      src: "",
+      src: ImgTwo,
       alt: "",
     },
     bestseller: false,
@@ -70,8 +77,11 @@ export const products = [
     category: "steel",
     price: 101,
     currency: "USD",
-    image: "",
-    bestseller: false,
+    image: {
+      src: ImgSeven,
+      alt: "",
+    },
+    bestseller: true,
     featured: false,
     details: null,
   },
@@ -81,7 +91,7 @@ export const products = [
     price: 101,
     currency: "USD",
     image: {
-      src: ProductImg,
+      src: FeaturedImg,
       alt: "Recycled Plastic",
     },
     bestseller: false,

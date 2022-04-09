@@ -5,20 +5,27 @@ import ProductImg4 from "@/images/imgFour.png";
 import ProductImg6 from "@/images/imgSix.png";
 import AddToCartBtn from "./AddToCartBtn";
 
-export default function ProductCard() {
+export default function ProductCard({ product }) {
+  console.log("display product", product);
   return (
     <div className="productCard">
       <div className="productImg position-relative">
-        <span className="badge position-absolute">Best Seller</span>
-        <Image src={ProductImg} alt="product img" layout="intrinsic" width={300} height={400} />
+        {product.bestseller ? <span className="badge position-absolute">Best Seller</span> : null}
+        <Image
+          src={product.image.src}
+          alt="product img"
+          layout="intrinsic"
+          width={300}
+          height={400}
+        />
         <div className="actionBtn position-absolute">
-          <AddToCartBtn />
+          <AddToCartBtn productToBeAdded={product} />
         </div>
       </div>
       <p className="productInfo">
-        <span className="category">Glass</span>
-        <span className="productName">Reinforced</span>
-        <span className="productPrice">$33.78</span>
+        <span className="category">{product.category}</span>
+        <span className="productName">{product.name}</span>
+        <span className="productPrice">${product.price}</span>
       </p>
     </div>
   );

@@ -1,15 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useSelector } from "react-redux";
-import Logo from "@/images/logo.svg";
-import CartIcon from "@/images/cartIcon.svg";
 import NavBar from "components/NavBar";
 import ProductDetailsHeader from "components/ProductDetailsHeader";
 import ProductsSectionContainer from "components/ProductsSectionContainer";
 import Link from "next/link";
 export default function Home() {
   const store = useSelector((state) => state);
-  console.log("storestorestore", store);
   return (
     <div className="homepage container">
       <Head>
