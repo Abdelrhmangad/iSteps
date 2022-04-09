@@ -15,9 +15,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## DONE TASKS:
 
 1.Featured Product.
+
 2.Product List.
+
 3.Add to Cart.
+
 4.Pagination.
+
 5.Sorting.
+
 6.Filtering.
+
 7.Web performance, HTML reports attached to `./public` for both mobile and desktop
