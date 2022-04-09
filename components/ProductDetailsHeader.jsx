@@ -5,38 +5,51 @@ import ProductImg from "@/images/headerBanner.png";
 import ImgOne from "@/images/imgOne.png";
 import ImgTwo from "@/images/imgTwo.png";
 import ImgThree from "@/images/imgThree.png";
+import { products } from "./data";
 
 export default function ProductDetailsHeader() {
+  console.log("products", products);
+  const featuredProduct = products.find((product) => product.featured);
+  console.log(featuredProduct);
   return (
     <div className="productDetails">
-      <h1 className="productTitle bold">Recycled Plastic</h1>
+      <h1 className="productTitle bold">{featuredProduct.name}</h1>
       <AddToCartBtn />
       <div className="productBanner">
         <span className="featuredBadge">Featured</span>
-        <Image src={ProductImg} alt="product img" layout="responsive" objectFit="contain" />
+        <Image
+          src={featuredProduct.image.src}
+          alt={featuredProduct.image.alt}
+          layout="responsive"
+          objectFit="contain"
+        />
       </div>
       <div className="description-container">
         <div className="suggestedProducts">
           <h4>Materials people also use</h4>
           <div className="productsIThumbnails d-flex">
-            <Image src={ImgOne} alt="product img" layout="intrinsic" objectFit="contain" />
-            <Image src={ImgTwo} alt="product img" layout="intrinsic" objectFit="contain" />
-            <Image src={ImgThree} alt="product img" layout="intrinsic" objectFit="contain" />
+            {featuredProduct.details.recommendations.map((each, index) => (
+              <Image
+                key={index}
+                src={each.src}
+                alt="product img"
+                layout="fixed"
+                width={120}
+                height={180}
+                objectFit="cover"
+              />
+            ))}
           </div>
           <p className="brief">
             <span className="title bold">Details</span>
-            <span>Weight: 2340g/m2</span>
-            <span>Thickness: 3cm</span>
+            <span>Weight: {featuredProduct.details.weight}g/m2</span>
+            <span>Thickness: {featuredProduct.details.thickness}cm</span>
           </p>
         </div>
         <div className="productDescription">
           <h3>About the Recycled Plastic</h3>
-          <span className="category sm-hidden">Plastic</span>
-          <p className="description">
-            Plastic recycling is the reprocessing of plastic waste into new and useful products.
-            When performed correctly, this can reduce dependence on landfill, conserve resources and
-            protect the environment from plastic pollution and greenhouse gas emissions...
-          </p>
+          <span className="category sm-hidden">{featuredProduct.category}</span>
+          <p className="description">{featuredProduct.details.description}</p>
         </div>
       </div>
     </div>

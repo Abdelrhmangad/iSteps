@@ -6,10 +6,11 @@ import ProductCard from "./productCard";
 import NextArr from "@/images/nextArr.svg";
 import PrevArr from "@/images/prevArr.svg";
 import CloseIcon from "@/images/closeIcon.svg";
-import { filtersData } from "./data";
+import { filtersData, products } from "./data";
 
 export default function ProductsSectionContainer() {
   const [mobileFilters, toggleMobileFilters] = useState(false);
+  const [productsData, setProductsData] = useState({ page: 1, data: products });
   return (
     <div className="productsSection">
       <div className="filtersHeader sm-hidden">
@@ -87,12 +88,9 @@ export default function ProductsSectionContainer() {
           </div>
         </div>
         <div className="productsContainer">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {productsData.data.map((product) => (
+            <ProductCard key={product.name} details={product} />
+          ))}
         </div>
       </div>
       <div className="paginationContainer">

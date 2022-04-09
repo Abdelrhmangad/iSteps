@@ -1,8 +1,38 @@
-export  const products = [
+import ProductImg from "../public/images/headerBanner.png";
+import ImgOne from "../public/images/imgOne.png";
+import ImgTwo from "../public/images/imgTwo.png";
+import ImgThree from "../public/images/imgThree.png";
+export const products = [
   {
     name: "Reinforced",
     category: "glass",
     price: 33.78,
+    currency: "USD",
+    image: {
+      src: "",
+      alt: "",
+    },
+    bestseller: true,
+    featured: false,
+    details: null,
+  },
+  {
+    name: "Pastel",
+    category: "glass",
+    price: 101.2,
+    currency: "USD",
+    image: {
+      src: "",
+      alt: "",
+    },
+    bestseller: true,
+    featured: false,
+    details: null,
+  },
+  {
+    name: "Red",
+    category: "brick",
+    price: 101.2,
     currency: "USD",
     image: {
       src: "",
@@ -51,27 +81,27 @@ export  const products = [
     price: 101,
     currency: "USD",
     image: {
-      src: "",
-      alt: "",
+      src: ProductImg,
+      alt: "Recycled Plastic",
     },
     bestseller: false,
     featured: true,
     details: {
       weight: 2340,
       thickness: 2,
-      description: "",
+      description:
+        "Plastic recycling is the reprocessing of plastic waste into new and useful products. When performed correctly, this can reduce dependence on landfill, conserve resources and protect the environment from plastic pollution and greenhouse gas emissions...",
       recommendations: [
         {
-          src: "",
+          src: ImgOne,
           alt: "",
         },
         {
-          src: "",
+          src: ImgThree,
           alt: "",
         },
         {
-          src: "",
-
+          src: ImgTwo,
           alt: "",
         },
       ],
