@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import SortArrow from "@/images/sortArrows.svg";
 import FilterIcon from "@/images/filterIcon.svg";
@@ -10,7 +10,48 @@ import { filtersData, products } from "./data";
 
 export default function ProductsSectionContainer() {
   const [mobileFilters, toggleMobileFilters] = useState(false);
-  const [productsData, setProductsData] = useState({ page: 1, data: products });
+  const [isMobileView, setIsMobileView] = useState(false);
+  useEffect(() => {
+    if (typeof window == "object" && window.innerWidth < 768) {
+      setIsMobileView(true);
+      setNumberOfProductsToDisplay(4);
+    } else {
+      setIsMobileView(false);
+      setNumberOfProductsToDisplay(6);
+    }
+  }, []);
+
+  const [productsData, setProductsData] = useState(products);
+  //todo: set active page number as a state
+  const [activePage, setActivePage] = useState(1);
+  //todo: set the number of products to be shown on the page as a state
+  const [numberOfProductsToDisplay, setNumberOfProductsToDisplay] = useState(6);
+  useEffect(() => {
+    //todo: slice products from page number * numbers of products to be shown on the page to page number * numbers of products to be shown on the page + numbers of products to be shown on the page
+    const productsToDisplay = products.slice(
+      (activePage - 1) * numberOfProductsToDisplay,
+      activePage * numberOfProductsToDisplay
+    );
+    setProductsData(productsToDisplay);
+  }, [activePage, numberOfProductsToDisplay]);
+
+  const [paginationPages, setPaginationPages] = useState(5);
+  var paginationCounters = [];
+  for (var i = 1; i < paginationPages; i++) {
+    paginationCounters.push(
+      <span
+        className={`pageNumber ${activePage == i ? "active" : ""}`}
+        onClick={() => setActivePage(i)}
+        key={i}>
+        {i}
+      </span>
+    );
+  }
+  //todo: make pagination counter as a state and compatiple always change on products length
+  useEffect(() => {
+    setPaginationPages(Math.ceil(products.length / numberOfProductsToDisplay) + 1);
+    console.log("|paginationPages", Math.ceil(products.length / numberOfProductsToDisplay));
+  }, [numberOfProductsToDisplay]);
   return (
     <div className="productsSection">
       <div className="filtersHeader sm-hidden">
@@ -53,7 +94,7 @@ export default function ProductsSectionContainer() {
             </div>
           ))}
         </aside>
-        <div className={`mobileFiltersContainer ${mobileFilters ? "" : "hide"}`}>
+        <div className={`mobileFiltersContainer ${mobileFilters && isMobileView ? "" : "hide"}`}>
           <div className="mobileFilters-content">
             <div className="mobileFilters-header">
               <h5>Filter</h5>
@@ -88,23 +129,24 @@ export default function ProductsSectionContainer() {
           </div>
         </div>
         <div className="productsContainer">
-          {productsData.data.map((product, index) => (
+          {productsData.map((product, index) => (
             <ProductCard key={index} product={product} />
           ))}
         </div>
       </div>
       <div className="paginationContainer">
         <div className="content">
-          <span className="prev">
-            <Image src={PrevArr} width={15} height={15} alt="prev arrow" />
-          </span>
-          {/* pages numbers */}
-          <span className="pageNumber">1</span>
-          <span className="pageNumber active">2</span>
-          <span className="pageNumber">3</span>
-          <span className="next">
-            <Image src={NextArr} width={15} height={15} alt="prev arrow" />
-          </span>
+          {activePage > 1 ? (
+            <span className="prev" onClick={() => setActivePage(activePage - 1)}>
+              <Image src={PrevArr} width={15} height={15} alt="prev arrow" />
+            </span>
+          ) : null}
+          {paginationCounters}
+          {paginationCounters.length > activePage ? (
+            <span className="next" onClick={() => setActivePage(activePage + 1)}>
+              <Image src={NextArr} width={15} height={15} alt="prev arrow" />
+            </span>
+          ) : null}
         </div>
       </div>
     </div>

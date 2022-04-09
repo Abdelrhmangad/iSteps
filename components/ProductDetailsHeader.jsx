@@ -1,11 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import AddToCartBtn from "./AddToCartBtn";
-import ProductImg from "@/images/headerBanner.png";
-import ImgOne from "@/images/imgOne.png";
-import ImgTwo from "@/images/imgTwo.png";
-import ImgThree from "@/images/imgThree.png";
 import { products } from "./data";
+import shimmer, { toBase64 } from "./shimmerPlaceholder/shimmer";
 
 export default function ProductDetailsHeader() {
   const featuredProduct = products.find((product) => product.featured);
@@ -20,6 +17,8 @@ export default function ProductDetailsHeader() {
           alt={featuredProduct.image.alt}
           layout="responsive"
           objectFit="contain"
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(100, 100))}`}
         />
       </div>
       <div className="description-container">

@@ -1,11 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import Logo from "@/images/logo.svg";
 import CartIcon from "@/images/cartIcon.svg";
-import CartDropDown from "./CartDropDown";
 import { toggleCart } from "redux/cartReducer";
 
+const CartDropDown = dynamic(() => import("./CartDropDown"));
 export default function NavBar() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();

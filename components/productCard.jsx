@@ -1,12 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import ProductImg from "@/images/imgFive.png";
-import ProductImg4 from "@/images/imgFour.png";
-import ProductImg6 from "@/images/imgSix.png";
 import AddToCartBtn from "./AddToCartBtn";
+import shimmer, { toBase64 } from "./shimmerPlaceholder/shimmer";
 
 export default function ProductCard({ product }) {
-  console.log("display product", product);
   return (
     <div className="productCard">
       <div className="productImg position-relative">
@@ -17,6 +14,8 @@ export default function ProductCard({ product }) {
           layout="intrinsic"
           width={300}
           height={400}
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(100, 100))}`}
         />
         <div className="actionBtn position-absolute">
           <AddToCartBtn productToBeAdded={product} />

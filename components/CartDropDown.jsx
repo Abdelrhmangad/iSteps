@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import CloseIcon from "@/images/closeIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { emptyCart, toggleCart } from "redux/cartReducer";
+import { clearCart, toggleCart } from "redux/cartReducer";
 
 export default function CartDropDown() {
   const cart = useSelector((state) => state.cart);
@@ -35,7 +35,7 @@ export default function CartDropDown() {
           <p className="text-center">Your cart is empty</p>
         )}
       </div>
-      <button className="btn cartClearBtn" onClick={() => dispatch(emptyCart())}>
+      <button className="btn cartClearBtn" onClick={() => dispatch(clearCart())}>
         Clear
       </button>
     </div>
