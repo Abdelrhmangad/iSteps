@@ -116,9 +116,12 @@ export default function ProductsSectionContainer() {
                 <input
                   type="radio"
                   id={filter.label}
-                  value={filter.lowerVal}
+                  value={JSON.stringify({ minVal: filter.lowerVal, maxVal: filter.maxVal })}
                   name="priceRange"
-                  onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => {
+                    dispatch(filterProductsWithPriceRange(JSON.parse(e.target.value)));
+                    dispatch(updateProductsToBeDisplayed());
+                  }}
                 />
                 <label htmlFor={filter.label}>{filter.label}</label>
               </div>
