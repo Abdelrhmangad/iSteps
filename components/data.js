@@ -1,4 +1,4 @@
-const products = [
+export  const products = [
   {
     name: "Reinforced",
     category: "glass",

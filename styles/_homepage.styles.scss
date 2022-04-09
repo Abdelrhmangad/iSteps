@@ -106,8 +106,10 @@
       display: flex;
       gap: 30px;
       padding-bottom: 50px;
+      .mobileFiltersContainer {
+        display: none;
+      }
       aside.filtersContainer {
-        //   background-color: purple;
         min-width: 200px;
         overflow: hidden;
 
@@ -117,7 +119,7 @@
           gap: 15px;
           padding-left: 1px;
           margin-top: 10px;
-          label{
+          label {
             font-weight: thin;
             font-size: 16px;
           }
@@ -149,7 +151,7 @@
           .productImg {
             .badge {
               position: absolute;
-              z-index: 9999;
+              z-index: 99;
               background-color: #ffffff;
               padding: 5px;
               font-weight: normal;
@@ -247,8 +249,84 @@
 
     .productsSection {
       .productsContainer-section {
+        flex-direction: column;
         aside.filtersContainer {
           display: none;
+        }
+        .mobileFiltersContainer {
+          display: block;
+          position: fixed;
+          bottom: 0px;
+          left: 0;
+          padding-top: 10vh;
+          z-index: 9999;
+          background-color: rgba(0, 0, 0, 0.548);
+          width: 100vw;
+          min-height: 100vh;
+          .mobileFilters-content {
+            width: 100vw;
+            min-height: 80vh;
+            max-height: 80vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            background-color: white;
+            padding: 30px 20px;
+            font-size: 1.2rem;
+            .mobileFilters-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              .closeBtn {
+                background-color: transparent;
+              }
+            }
+            .checkboxContainer {
+              display: flex;
+              align-items: center;
+              gap: 15px;
+              padding-left: 1px;
+              margin-top: 10px;
+              label {
+                font-weight: thin;
+                font-size: 16px;
+              }
+              input[type="checkbox"],
+              input[type="radio"] {
+                appearance: square;
+                /* Double-sized Checkboxes */
+                border: 1px solid black;
+                accent-color: black;
+                padding: 10px;
+              }
+            }
+          }
+          .mobileFilterActions {
+            width: 100%;
+            padding: 20px 10px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: white;
+            border-top: 1px solid #e4e4e4;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 30px;
+            .btn {
+              padding: 20px;
+              width: 100%;
+              border: 1px solid black;
+              line-height: 0;
+              &.save {
+                background: #000000;
+                color: white;
+              }
+            }
+          }
+
+          &.hide {
+            display: none;
+          }
         }
         .productsContainer {
           flex-wrap: wrap;
