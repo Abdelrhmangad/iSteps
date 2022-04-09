@@ -26,4 +26,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 6.Filtering.
 
-7.Web performance, HTML reports attached to `./public` for both mobile and desktop
+7.Web performance, Lighthouse HTML reports attached to `./public` for both mobile and desktop
