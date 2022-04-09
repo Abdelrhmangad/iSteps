@@ -40,7 +40,7 @@ const globalDataSlice = createSlice({
     toggleSortingOrder: (state, action) => {
       let sortKey = state.sortKey;
       let newSortOrder = state.sortOrder === "desc" ? "asc" : "desc";
-      state.productsToBeDisplayed.sort((a, b) => {
+      state.products.sort((a, b) => {
         if (a[sortKey] > b[sortKey]) return newSortOrder === DEFAULT_ORDER ? 1 : -1;
         if (a[sortKey] < b[sortKey]) return newSortOrder === DEFAULT_ORDER ? -1 : 1;
       });

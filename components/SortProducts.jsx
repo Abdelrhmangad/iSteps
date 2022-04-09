@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import Image from "next/image";
 import SortArrow from "@/images/sortArrows.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { changeSortOrder, sortProductsInStore, toggleSortingOrder } from "redux/productsReducer";
+import {
+  sortProductsInStore,
+  toggleSortingOrder,
+  updateProductsToBeDisplayed,
+} from "redux/productsReducer";
 
 export default function SortProducts() {
   const sortingData = useSelector((state) => state.products);
@@ -17,7 +21,10 @@ export default function SortProducts() {
           className="pointer"
           src={SortArrow}
           alt="sort arrow"
-          onClick={() => dispatch(toggleSortingOrder())}
+          onClick={() => {
+            dispatch(toggleSortingOrder());
+            dispatch(updateProductsToBeDisplayed());
+          }}
         />
         <span className="sortBy">Sort by</span>
       </span>
