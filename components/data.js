@@ -243,7 +243,7 @@ export const filtersData = {
     },
     {
       filterLabel: "Carbon Fiber",
-      value: "carbon-fiber",
+      value: "carbon fiber",
     },
     {
       filterLabel: "Copper",

@@ -10,6 +10,7 @@ const initialState = {
   productsToBeDisplayed: [],
   sortKey: "price",
   sortOrder: "asc", //asc | desc
+  filteringCategories: [],
 };
 
 const globalDataSlice = createSlice({
@@ -45,6 +46,46 @@ const globalDataSlice = createSlice({
       });
       state.sortOrder = newSortOrder;
     },
+    filterProductsWithCategory: (state, action) => {
+      function updateStoreData(newData) {
+        state.products = newData;
+        state.productsToBeDisplayed = newData.slice(
+          (state.activePage - 1) * state.numberOfProductsToDisplay,
+          state.activePage * state.numberOfProductsToDisplay
+        );
+      }
+      // todo: add category to be filtered with to an array and check if it exists remove it, if not add it
+      const filteredProducts = [];
+      if (action.payload.type) {
+        //* to filter with checked categories only
+        state.filteringCategories.push(action.payload.category);
+        products.map((eachProd) => {
+          state.filteringCategories.map((eachCat) => {
+            if (eachProd.category == eachCat) {
+              filteredProducts.push(eachProd);
+            }
+          });
+        });
+        updateStoreData(filteredProducts);
+      } else {
+        //* to filter with categories in state only without the unchecked category
+        const categoryIndex = state.filteringCategories.indexOf(action.payload.category);
+        state.filteringCategories.splice(categoryIndex, 1);
+        if (state.filteringCategories.length > 0) {
+          products.map((eachProd) => {
+            state.filteringCategories.map((eachCat) => {
+              if (eachProd.category == eachCat) {
+                filteredProducts.push(eachProd);
+              }
+            });
+          });
+          updateStoreData(filteredProducts);
+        } else {
+          //* to reset products, if no filters are added
+          updateStoreData(products);
+        }
+      }
+    },
   },
 });
 
@@ -55,4 +96,5 @@ export const {
   updateProductsToBeDisplayed,
   sortProductsInStore,
   toggleSortingOrder,
+  filterProductsWithCategory,
 } = globalDataSlice.actions;

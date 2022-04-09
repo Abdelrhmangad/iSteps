@@ -7,7 +7,7 @@ import CloseIcon from "@/images/closeIcon.svg";
 import { filtersData } from "./data";
 import Paginator from "./paginator";
 import { useDispatch, useSelector } from "react-redux";
-import { setProductsCountToBeDisplayed } from "redux/productsReducer";
+import { filterProductsWithCategory, setProductsCountToBeDisplayed } from "redux/productsReducer";
 import SortProducts from "./SortProducts";
 
 export default function ProductsSectionContainer() {
@@ -25,7 +25,8 @@ export default function ProductsSectionContainer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const filteredProducts = useSelector((state) => state.products.productsToBeDisplayed);
-
+  const productsState = useSelector((state) => state.products);
+  console.log("watch filtering categories", productsState.filteringCategories);
   return (
     <div className="productsSection">
       <SortProducts />
@@ -39,7 +40,17 @@ export default function ProductsSectionContainer() {
           <h5>Materials</h5>
           {filtersData["materilaFilters"].map((filter, index) => (
             <div key={index} className="checkboxContainer">
-              <input type="checkbox" id={filter.value} value={filter.value} name="materials" />
+              <input
+                type="checkbox"
+                id={filter.value}
+                value={filter.value}
+                name="materials"
+                onChange={(e) =>
+                  dispatch(
+                    filterProductsWithCategory({ category: filter.value, type: e.target.checked })
+                  )
+                }
+              />
               <label htmlFor={filter.value}>{filter.filterLabel}</label>
             </div>
           ))}
@@ -93,9 +104,11 @@ export default function ProductsSectionContainer() {
           </div>
         </div>
         <div className="productsContainer">
-          {filteredProducts.map((product, index) => (
-            <ProductCard key={index} product={product} />
-          ))}
+          {filteredProducts.length ? (
+            filteredProducts.map((product, index) => <ProductCard key={index} product={product} />)
+          ) : (
+            <h3 className="text-center">No products found</h3>
+          )}
         </div>
       </div>
       <Paginator />

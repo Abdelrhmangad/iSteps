@@ -8,10 +8,8 @@ export default function SortProducts() {
   const sortingData = useSelector((state) => state.products);
   const dispatch = useDispatch();
   function sortProducts(e) {
-    console.log(e.target.value);
     dispatch(sortProductsInStore({ sortKey: e.target.value, sortOrder: sortingData.sortOrder }));
   }
-  console.log("state all of it here", sortingData);
   return (
     <div className="filtersHeader sm-hidden">
       <span>
