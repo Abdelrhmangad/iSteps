@@ -110,6 +110,26 @@
         //   background-color: purple;
         min-width: 200px;
         overflow: hidden;
+
+        .checkboxContainer {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          padding-left: 1px;
+          margin-top: 10px;
+          label{
+            font-weight: thin;
+            font-size: 16px;
+          }
+          input[type="checkbox"],
+          input[type="radio"] {
+            appearance: square;
+            /* Double-sized Checkboxes */
+            border: 1px solid black;
+            accent-color: black;
+            padding: 10px;
+          }
+        }
       }
       .productsContainer {
         min-width: 100%;

@@ -5,6 +5,7 @@ import FilterIcon from "@/images/filterIcon.svg";
 import ProductCard from "./productCard";
 import NextArr from "@/images/nextArr.svg";
 import PrevArr from "@/images/prevArr.svg";
+import { filtersData } from "./data";
 
 export default function ProductsSectionContainer() {
   return (
@@ -26,8 +27,26 @@ export default function ProductsSectionContainer() {
       <div className="productsContainer-section">
         <aside className="filtersContainer">
           <h5>Materials</h5>
+          {filtersData["materilaFilters"].map((filter) => (
+            <div key={filter.value} className="checkboxContainer">
+              <input type="checkbox" id={filter.value} value={filter.value} name="materials" />
+              <label htmlFor={filter.value}>{filter.filterLabel}</label>
+            </div>
+          ))}
           <hr className="sectionsSeparater" />
           <h5>Price range</h5>
+          {filtersData["priceRangeFilters"].map((filter) => (
+            <div key={filter.value} className="checkboxContainer">
+              <input
+                type="radio"
+                id={filter.label}
+                value={filter.lowerVal}
+                name="priceRange"
+                onChange={(e) => console.log(e.target.value)}
+              />
+              <label htmlFor={filter.label}>{filter.label}</label>
+            </div>
+          ))}
         </aside>
         <div className="productsContainer">
           <ProductCard />
