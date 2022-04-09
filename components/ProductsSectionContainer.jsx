@@ -7,7 +7,12 @@ import CloseIcon from "@/images/closeIcon.svg";
 import { filtersData } from "./data";
 import Paginator from "./paginator";
 import { useDispatch, useSelector } from "react-redux";
-import { filterProductsWithCategory, setProductsCountToBeDisplayed } from "redux/productsReducer";
+import {
+  clearFiltering,
+  filterProductsWithCategory,
+  setProductsCountToBeDisplayed,
+  updateProductsToBeDisplayed,
+} from "redux/productsReducer";
 import SortProducts from "./SortProducts";
 
 export default function ProductsSectionContainer() {
@@ -27,6 +32,13 @@ export default function ProductsSectionContainer() {
   const filteredProducts = useSelector((state) => state.products.productsToBeDisplayed);
   const productsState = useSelector((state) => state.products);
   console.log("watch filtering categories", productsState.filteringCategories);
+
+  function clearFilters() {
+    document.querySelectorAll("input[type='checkbox']").forEach((el) => (el.checked = false));
+    dispatch(clearFiltering());
+    dispatch(updateProductsToBeDisplayed());
+    toggleMobileFilters(false);
+  }
   return (
     <div className="productsSection">
       <SortProducts />
@@ -79,7 +91,17 @@ export default function ProductsSectionContainer() {
             </div>
             {filtersData["materilaFilters"].map((filter, index) => (
               <div key={index} className="checkboxContainer">
-                <input type="checkbox" id={filter.value} value={filter.value} name="materials" />
+                <input
+                  type="checkbox"
+                  id={filter.value}
+                  value={filter.value}
+                  name="materials"
+                  onChange={(e) =>
+                    dispatch(
+                      filterProductsWithCategory({ category: filter.value, type: e.target.checked })
+                    )
+                  }
+                />
                 <label htmlFor={filter.value}>{filter.filterLabel}</label>
               </div>
             ))}
@@ -98,8 +120,12 @@ export default function ProductsSectionContainer() {
               </div>
             ))}
             <div className="mobileFilterActions">
-              <button className="btn clear">Clear</button>
-              <button className="btn save">Save</button>
+              <button className="btn clear" onClick={() => clearFilters()}>
+                Clear
+              </button>
+              <button className="btn save" onClick={() => toggleMobileFilters(false)}>
+                Save
+              </button>
             </div>
           </div>
         </div>

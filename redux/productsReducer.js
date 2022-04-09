@@ -86,6 +86,10 @@ const globalDataSlice = createSlice({
         }
       }
     },
+    clearFiltering: (state, action) => {
+      state.filteringCategories = [];
+      state.products = products;
+    },
   },
 });
 
@@ -97,4 +101,5 @@ export const {
   sortProductsInStore,
   toggleSortingOrder,
   filterProductsWithCategory,
+  clearFiltering,
 } = globalDataSlice.actions;
