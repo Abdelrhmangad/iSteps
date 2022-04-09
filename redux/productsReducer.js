@@ -86,6 +86,21 @@ const globalDataSlice = createSlice({
         }
       }
     },
+    filterProductsWithPriceRange: (state, action) => {
+      //* get the most expensive price to make it as a reference for maxVal
+      let mostExpensiveProduct = products.reduce((max, min) => (max.price > min.price ? max : min));
+      let selectedMaxVal = action.payload.maxVal || mostExpensiveProduct.price;
+      let selectedMinVal = action.payload.minVal;
+      //* reset products to make it sort all products not the already sorted ones
+      state.products = products;
+      let sortedProductsArr = [];
+      state.products.map((eachProduct) => {
+        if (eachProduct.price >= selectedMinVal && eachProduct.price <= selectedMaxVal) {
+          sortedProductsArr.push(eachProduct);
+        }
+      });
+      state.products = sortedProductsArr;
+    },
     clearFiltering: (state, action) => {
       state.filteringCategories = [];
       state.products = products;
@@ -102,4 +117,5 @@ export const {
   toggleSortingOrder,
   filterProductsWithCategory,
   clearFiltering,
+  filterProductsWithPriceRange,
 } = globalDataSlice.actions;

@@ -190,6 +190,19 @@ export const products = [
     details: null,
   },
   {
+    name: "new product",
+    category: "steel",
+    price: 202,
+    currency: "USD",
+    image: {
+      src: ImgSeven,
+      alt: "",
+    },
+    bestseller: true,
+    featured: false,
+    details: null,
+  },
+  {
     name: "Recycled Plastic",
     category: "plastic",
     price: 101,
@@ -269,7 +282,7 @@ export const filtersData = {
     {
       label: "More than $200",
       maxVal: null,
-      lowerVal: 0,
+      lowerVal: 200,
     },
   ],
 };
